@@ -40,13 +40,13 @@
 
         .countdown-container { flex: 1; max-width: 20vw; margin: 0 3vw; }
         .countdown-label { 
-            font-size: 0.8rem; font-weight: 800; display: flex; 
+            font-size: 1.2rem; font-weight: 900; display: flex; 
             justify-content: space-between; margin-bottom: 6px; color: #2E7D32;
         }
         .progress-outer { width: 100%; height: 6px; background: #E5E5EA; border-radius: 3px; overflow: hidden; }
         #countdown-fill { width: 75%; height: 100%; background: #34C759; transition: width 1s ease-in-out; }
 
-        .weather-block { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .weather-block { display: flex; align-items: center; gap: 12px; cursor: pointer; background: rgba(0, 0, 0, 0.05); padding: 8px 15px; border-radius: 14px;}
         .weather-img { width: 4.5rem; height: 4.5rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05)); }
         #current-temp { font-size: 2.2rem; font-weight: 800; color: var(--text); letter-spacing: -1px; }
 
@@ -64,16 +64,51 @@
             border-radius: 0 0 40px 40px; touch-action: none;
         }
         #weather-drawer.active { top: 0; }
-        #forecast-container { display: flex; gap: 10px; justify-content: space-between; padding: 10px 0 30px; width: 100%; }
-        .forecast-card {
-            background: #F2F2F7; padding: 12px 8px; border-radius: 20px;
-            text-align: center; flex: 1; min-width: 0;
-            display: flex; flex-direction: column; align-items: center; gap: 4px; border: 1px solid #E5E5EA;
+        #forecast-container {
+            display: flex;
+            flex-direction: row; 
+            gap: 20px;
+            padding: 30px 30px 10px; /* Reduced bottom padding to give footer room */
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: space-between;
         }
-        .fc-day { font-weight: 800; font-size: 0.85rem; color: var(--text); }
-        .fc-temp { font-weight: 800; font-size: 1rem; color: var(--text); }
-        .psr-label { font-size: 0.6rem; font-weight: 800; padding: 4px 6px; border-radius: 6px; background: white; color: var(--accent); width: 90%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .fc-icon { width: 3.2rem; height: 3.2rem; }
+        .forecast-card {
+            background: #E5E5EA !important; 
+            padding: 45px 15px !important; /* Increased vertical padding */
+            border-radius: 35px !important;
+            display: flex !important;
+            flex-direction: column !important; 
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid #D1D1D6 !important;
+            flex: 1; /* Forces all cards to be equal width */
+            min-height: 350px; /* Uses up the space freed by the headers */
+        }
+        .fc-day { 
+            font-size: 2rem !important; /* Doubled from original */
+            font-weight: 900; 
+            margin-bottom: 10px;
+        }
+        .fc-temp { 
+            font-size: 2.2rem !important; 
+            font-weight: 900; 
+            margin: 15px 0; 
+        }
+        .psr-label { 
+            font-size: 1.2rem !important; 
+            background: white; 
+            padding: 8px 18px !important; 
+            border-radius: 12px; 
+            color: var(--accent);
+            font-weight: 800;
+        }
+        .fc-icon { 
+            width: 9rem !important; /* Massive icon size */
+            height: 9rem !important;
+            margin: 10px 0; 
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
         #drawer-drag-zone { width: 100%; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: grab; }
         .visual-handle { width: 80px; height: 8px; background: #D1D1D6; border-radius: 4px; }
 
@@ -83,7 +118,7 @@
         .day-column { border-right: 1px solid #F2F2F7; position: relative; min-height: 1800px; padding-top: 60px; background-image: linear-gradient(#F2F2F7 1px, transparent 1px); background-size: 100% 90px; }
         #view-calendar .day-column { background-image: linear-gradient(#F2F2F7 1px, transparent 1px); background-size: 100% 90px; }
         .day-header { position: absolute; top: 0; left: 0; right: 0; height: 60px; text-align: center; display: flex; flex-direction: column; justify-content: center; background: white; z-index: 10; border-bottom: 1px solid #E5E5EA; }
-        .is-weekend { background-color: #f7fdff; }       
+        .is-weekend { background-color: #E9F5FE !important; }       
         .task-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; height: 100%; }
         .task-day { background: #f9f9fb; border-radius: 15px; padding: 10px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #eee; }
         .task-day-header { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--dim-text); text-align: center; margin-bottom: 5px; }
@@ -132,7 +167,7 @@
 
         #status-box { position: fixed; bottom: 12px; right: 12px; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); padding: 6px 10px; border-radius: 8px; border: 1px solid #D1D1D6; font-size: 0.6rem; color: var(--dim-text); text-align: right; z-index: 1000; }
         #sleep-screen { position: fixed; inset: 0; background: #000; z-index: 10000; display: none; align-items: center; justify-content: center; cursor: pointer; }
-        #dim-clock { font-size: 8rem; font-weight: 900; color: #ffcc00; letter-spacing: -5px; text-shadow: 0 0 20px rgba(255, 204, 0, 0.4); }
+        #dim-clock { font-size: 8rem; font-weight: 900; color: #535353; letter-spacing: -5px; text-shadow: 0 0 20px #33333366; }
         .blink { color: #FF3B30 !important; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.5; } }
         /* Styling for Holiday Events */
@@ -355,15 +390,20 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
 
 <div id="weather-drawer">
     <div class="drawer-content">
-        <div class="drawer-header" style="text-align:center;">
-            <h3>5-Day Forecast</h3>
-            <div style="font-size: 0.8rem; color: var(--dim-text);">Sham Shui Po Station</div>
-        </div>
         <div id="forecast-container"></div>
         
-        <div id="drawer-drag-zone">
-            <div class="visual-handle"></div>
-            <span style="font-size: 0.7rem; font-weight: 800; color: #AEAEB2; margin-top: 10px;">DRAG UP TO CLOSE</span>
+        <div id="drawer-footer" style="display: flex; align-items: flex-end; padding: 0 40px 30px; position: relative; min-height: 100px;">
+            <div id="tray-location-info" style="text-align: left; flex: 1;">
+                <h3 style="margin: 0; font-size: 1.8rem; font-weight: 900;">5-Day Forecast</h3>
+                <div style="font-size: 1rem; font-weight: 700; color: var(--dim-text);">Sham Shui Po Station</div>
+            </div>
+            
+            <div id="drawer-drag-zone" style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 20px; width: 300px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: grab; z-index: 10;">
+                <div class="visual-handle" style="width: 100px; height: 10px; background: #D1D1D6; border-radius: 5px;"></div>
+                <span style="font-size: 0.9rem; font-weight: 800; color: #AEAEB2; margin-top: 12px; letter-spacing: 1px;">DRAG UP TO CLOSE</span>
+            </div>
+
+            <div style="flex: 1;"></div>
         </div>
     </div>
 </div>
@@ -554,11 +594,21 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
     }
 
     function renderForecast(forecasts) {
-        const container = document.getElementById('forecast-container'); container.innerHTML = '';
+        const container = document.getElementById('forecast-container');
+        container.innerHTML = '';
+        
         forecasts.forEach(f => {
-            const raw = f.forecastDate; const formattedDate = `${raw.substring(0,4)}-${raw.substring(4,6)}-${raw.substring(6,8)}`;
+            const raw = f.forecastDate;
+            const formattedDate = `${raw.substring(0,4)}-${raw.substring(4,6)}-${raw.substring(6,8)}`;
             const dateObj = new Date(formattedDate);
-            container.innerHTML += `<div class="forecast-card"><div class="fc-day">${dateObj.toLocaleDateString('en-US', {weekday: 'short'})}</div><img class="fc-icon" src="https://basmilius.github.io/weather-icons/production/fill/all/${ICON_MAP[f.ForecastIcon] || 'clear-day'}.svg"><div class="fc-temp">${f.forecastMintemp.value}°-${f.forecastMaxtemp.value}°</div><div class="psr-label">Rain: ${f.PSR || 'Low'}</div></div>`;
+            
+            container.innerHTML += `
+                <div class="forecast-card">
+                    <div class="fc-day">${dateObj.toLocaleDateString('en-US', {weekday: 'short'})}</div>
+                    <img class="fc-icon" src="https://basmilius.github.io/weather-icons/production/fill/all/${ICON_MAP[f.ForecastIcon] || 'clear-day'}.svg">
+                    <div class="fc-temp">${f.forecastMintemp.value}° - ${f.forecastMaxtemp.value}°</div>
+                    <div class="psr-label">💧 ${f.PSR || 'Low'}</div>
+                </div>`;
         });
     }
 
