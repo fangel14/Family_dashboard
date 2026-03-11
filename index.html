@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Family Command Center</title>
     <style>
         :root {
@@ -130,7 +132,7 @@
 
         #status-box { position: fixed; bottom: 12px; right: 12px; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); padding: 6px 10px; border-radius: 8px; border: 1px solid #D1D1D6; font-size: 0.6rem; color: var(--dim-text); text-align: right; z-index: 1000; }
         #sleep-screen { position: fixed; inset: 0; background: #000; z-index: 10000; display: none; align-items: center; justify-content: center; cursor: pointer; }
-        #dim-clock { font-size: 12vw; color: #1a1a1a; font-weight: 200; letter-spacing: -5px; }
+        #dim-clock { font-size: 8rem; font-weight: 900; color: #ffcc00; letter-spacing: -5px; text-shadow: 0 0 20px rgba(255, 204, 0, 0.4); }
         .blink { color: #FF3B30 !important; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.5; } }
         /* Styling for Holiday Events */
