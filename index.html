@@ -68,25 +68,25 @@
             display: flex;
             flex-direction: row; 
             gap: 20px;
-            padding: 30px 30px 10px; /* Reduced bottom padding to give footer room */
+            padding: 30px 30px 10px;
             width: 100%;
             box-sizing: border-box;
             justify-content: space-between;
         }
         .forecast-card {
             background: #E5E5EA !important; 
-            padding: 45px 15px !important; /* Increased vertical padding */
+            padding: 45px 15px !important;
             border-radius: 35px !important;
             display: flex !important;
             flex-direction: column !important; 
             align-items: center;
             justify-content: space-between;
             border: 2px solid #D1D1D6 !important;
-            flex: 1; /* Forces all cards to be equal width */
-            min-height: 350px; /* Uses up the space freed by the headers */
+            flex: 1;
+            min-height: 350px;
         }
         .fc-day { 
-            font-size: 2rem !important; /* Doubled from original */
+            font-size: 2rem !important;
             font-weight: 900; 
             margin-bottom: 10px;
         }
@@ -104,7 +104,7 @@
             font-weight: 800;
         }
         .fc-icon { 
-            width: 9rem !important; /* Massive icon size */
+            width: 9rem !important;
             height: 9rem !important;
             margin: 10px 0; 
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
@@ -114,7 +114,7 @@
 
         .calendar-layout { display: flex; height: 100%; position: relative; overflow: hidden; }
         .time-gutter { width: 70px; border-right: 1px solid #E5E5EA; background: #fafafa; padding-top: 60px; flex-shrink: 0; }
-        .calendar-grid { flex: 1; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; overflow-y: auto; overflow-x: hidden; /* Prevents Saturday from sliding off-screen */ height: 100%; }
+        .calendar-grid { flex: 1; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; overflow-y: auto; overflow-x: hidden; height: 100%; }
         .day-column { border-right: 1px solid #F2F2F7; position: relative; min-height: 1800px; padding-top: 60px; background-image: linear-gradient(#F2F2F7 1px, transparent 1px); background-size: 100% 90px; }
         #view-calendar .day-column { background-image: linear-gradient(#F2F2F7 1px, transparent 1px); background-size: 100% 90px; }
         .day-header { position: absolute; top: 0; left: 0; right: 0; height: 60px; text-align: center; display: flex; flex-direction: column; justify-content: center; background: white; z-index: 10; border-bottom: 1px solid #E5E5EA; }
@@ -137,10 +137,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;       /* Added: Makes the letter clearer */
+            font-weight: 800;
             border: 1px solid white;
             margin-left: -7px;
-            line-height: 1;         /* Added: Prevents offset in some browsers */
+            line-height: 1;
         }
         .avatar-stack { display: flex; bottom: 5px; right: 5px; }
         .time-label { height: 90px; display: flex; align-items: flex-start; justify-content: flex-end; padding-right: 10px; color: var(--dim-text);font-size: 0.75rem; font-weight: 700; box-sizing: border-box; transform: translateY(-0.5em); }
@@ -170,204 +170,260 @@
         #dim-clock { font-size: 14rem; font-weight: 900; color: #363636; letter-spacing: -8px; text-shadow: 0 0 40px #33333366; }
         .blink { color: #FF3B30 !important; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.5; } }
-        /* Styling for Holiday Events */
-.event-card.holiday {
-    background-color: #f7fdff !important; /* Light Neutral Grey */
-    border: 0.5px dashed #D1D1D6 !important;
-    opacity: 0.9;
-}
-.event-card.holiday .event-title {
-    color: #8E8E93 !important; /* Dimmed text */
-    font-style: italic;
-}
 
-        /* Modal Overlay */
-.modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 20000;
-    display: flex; align-items: center; justify-content: center;
-    backdrop-filter: blur(5px);
-}
+        .event-card.holiday {
+            background-color: #f7fdff !important;
+            border: 0.5px dashed #D1D1D6 !important;
+            opacity: 0.9;
+        }
+        .event-card.holiday .event-title {
+            color: #8E8E93 !important;
+            font-style: italic;
+        }
 
-/* Modal Card */
-.modal-card {
-    background: white; width: 90%; max-width: 500px; padding: 25px;
-    border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-    display: flex; flex-direction: column; gap: 15px;
-}
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 20000;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(5px);
+        }
 
-.modal-card h2 { margin: 0 0 5px 0; font-size: 1.5rem; }
+        .modal-card {
+            background: white; width: 90%; max-width: 500px; padding: 25px;
+            border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            display: flex; flex-direction: column; gap: 15px;
+        }
 
-/* Inputs */
-.modal-input, .modal-input-lg {
-    width: 100%; padding: 12px; border: 1px solid #E5E5EA; border-radius: 12px;
-    font-size: 1rem; box-sizing: border-box; background: #F9F9FB;
-}
-.modal-input-lg { font-size: 1.2rem; font-weight: 600; }
-label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; margin-bottom: 5px; text-transform: uppercase; }
+        .modal-card h2 { margin: 0 0 5px 0; font-size: 1.5rem; }
 
-/* Family Tags */
-.family-tags { display: flex; gap: 10px; margin: 5px 0; }
-.tag-check { cursor: pointer; position: relative; }
-.tag-check input { display: none; }
-.tag-check span {
-    padding: 8px 16px; border-radius: 20px; background: #F2F2F7;
-    color: #8E8E93; font-weight: 700; font-size: 0.9rem; display: block;
-    border: 2px solid transparent; transition: all 0.2s;
-}
-.tag-check input:checked + span {
-    background: var(--tag-color); color: var(--tag-text);
-    border-color: var(--tag-text); box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+        .modal-input, .modal-input-lg {
+            width: 100%; padding: 12px; border: 1px solid #E5E5EA; border-radius: 12px;
+            font-size: 1rem; box-sizing: border-box; background: #F9F9FB;
+        }
+        .modal-input-lg { font-size: 1.2rem; font-weight: 600; }
+        label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; margin-bottom: 5px; text-transform: uppercase; }
 
-/* Layout Helpers */
-.form-row { display: flex; gap: 15px; align-items: flex-end; }
-.btn-group { display: flex; gap: 10px; }
-.btn-group button {
-    flex: 1; padding: 10px; border: none; background: #E5E5EA; border-radius: 8px;
-    font-weight: 700; cursor: pointer;
-}
+        .family-tags { display: flex; gap: 10px; margin: 5px 0; }
+        .tag-check { cursor: pointer; position: relative; }
+        .tag-check input { display: none; }
+        .tag-check span {
+            padding: 8px 16px; border-radius: 20px; background: #F2F2F7;
+            color: #8E8E93; font-weight: 700; font-size: 0.9rem; display: block;
+            border: 2px solid transparent; transition: all 0.2s;
+        }
+        .tag-check input:checked + span {
+            background: var(--tag-color); color: var(--tag-text);
+            border-color: var(--tag-text); box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
 
-/* Actions */
-.modal-actions { display: flex; gap: 10px; margin-top: 10px; }
-.btn-cancel { flex: 1; padding: 15px; border-radius: 12px; border: none; background: #F2F2F7; font-weight: 700; font-size: 1rem; color: #333; }
-.btn-save { flex: 2; padding: 15px; border-radius: 12px; border: none; background: var(--accent); font-weight: 700; font-size: 1rem; color: white; }
-.btn-delete { flex: 0.5; padding: 15px; border-radius: 12px; border: none; background: #FF3B30; font-weight: 700; font-size: 1rem; color: white; }
+        .form-row { display: flex; gap: 15px; align-items: flex-end; }
+        .btn-group { display: flex; gap: 10px; }
+        .btn-group button {
+            flex: 1; padding: 10px; border: none; background: #E5E5EA; border-radius: 8px;
+            font-weight: 700; cursor: pointer;
+        }
+
+        .modal-actions { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-cancel { flex: 1; padding: 15px; border-radius: 12px; border: none; background: #F2F2F7; font-weight: 700; font-size: 1rem; color: #333; }
+        .btn-save { flex: 2; padding: 15px; border-radius: 12px; border: none; background: var(--accent); font-weight: 700; font-size: 1rem; color: white; }
+        .btn-delete { flex: 0.5; padding: 15px; border-radius: 12px; border: none; background: #FF3B30; font-weight: 700; font-size: 1rem; color: white; }
 
         #fab-add { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 30px; background: var(--accent); color: white; font-size: 30px; border: none; box-shadow: 0 4px 15px rgba(0,122,255,0.4); cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
         #fab-add:active { transform: scale(0.95); }
 
-/* MEGA BUBBLES for Task View */
-#view-tasks .event-card {
-    min-height: 100px; /* Even bigger */
-    margin-bottom: 15px;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 8px;
-}
+        #view-tasks .event-card {
+            min-height: 100px;
+            margin-bottom: 15px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 8px;
+        }
 
-#view-tasks .event-title {
-    font-size: 1.3rem; /* Highly readable */
-    width: 85%; /* Leave room for avatars if they move */
-}
+        #view-tasks .event-title {
+            font-size: 1.3rem;
+            width: 85%;
+        }
 
-#view-tasks .event-time {
-    font-size: 0.9rem;
-    color: var(--text); /* Make time darker and more prominent */
-    font-weight: 800;
-    background: rgba(255,255,255,0.5);
-    padding: 2px 6px;
-    border-radius: 4px;
-    width: fit-content;
-}
+        #view-tasks .event-time {
+            font-size: 0.9rem;
+            color: var(--text);
+            font-weight: 800;
+            background: rgba(255,255,255,0.5);
+            padding: 2px 6px;
+            border-radius: 4px;
+            width: fit-content;
+        }
 
-#view-tasks .avatar-stack {
-    bottom: 12px;
-    right: 12px;
-    position: sticky;
-}
+        #view-tasks .avatar-stack {
+            bottom: 12px;
+            right: 12px;
+            position: sticky;
+        }
 
-#view-tasks .avatar-bubble {
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-    border: 2px solid white;
-}
+        #view-tasks .avatar-bubble {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            border: 2px solid white;
+        }
 
-/* Ensure Task View Indicators are Visible */
-#view-tasks .task-day.is-weekend { 
-    background-color: #f7fdff !important; 
-}
+        #view-tasks .task-day.is-weekend { 
+            background-color: #f7fdff !important; 
+        }
 
-#view-tasks .task-day.has-holiday { 
-    border: 2px dashed #D1D1D6 !important; 
-    background-color: #fafafa !important;
-}
+        #view-tasks .task-day.has-holiday { 
+            border: 2px dashed #D1D1D6 !important; 
+            background-color: #fafafa !important;
+        }
 
-/* Optional: Make the text color change for Holidays to be extra clear */
-#view-tasks .task-day.has-holiday .task-day-header {
-    color: var(--accent) !important;
-}
+        #view-tasks .task-day.has-holiday .task-day-header {
+            color: var(--accent) !important;
+        }
 
-/* Today Highlight for Tasks */
-#view-tasks .task-day.is-today {
-    border: 3px solid var(--accent) !important;
-    background-color: #f0f7ff !important;
-}
+        #view-tasks .task-day.is-today {
+            border: 3px solid var(--accent) !important;
+            background-color: #f0f7ff !important;
+        }
 
-/* Align avatars to the right inside calendar cards */
-.event-card .avatar-stack {
-    position: absolute;
-    bottom: 8px;      /* Anchors to bottom */
-    right: 8px;       /* Anchors to right */
-    left: auto;       /* Removes any left-side bias */
-    display: flex;
-    flex-direction: row-reverse; /* Bubbles stack from right-to-left */
-    justify-content: flex-start;
-    gap: 0;           /* Maintain overlap if desired */
-}
+        .event-card .avatar-stack {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            left: auto;
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+            gap: 0;
+        }
 
-/* Ensure the title leaves enough room so it doesn't overlap avatars */
-.event-card .event-title {
-    padding-right: 40px; /* Space for the avatars on the right */
-    width: 100%;
-    box-sizing: border-box;
-}
+        .event-card .event-title {
+            padding-right: 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-.event-card .avatar-stack {
-    position: absolute;
-    bottom: 8px;
-    right: 8px; /* Anchor to the right */
-    left: auto;
-    display: flex;
-    flex-direction: row-reverse; /* Stack from right to left */
-}
+        .star-rating span {
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: #f0f0f0;
+            transition: color 0.2s, transform 0.1s;
+            display: inline-block;
+            padding: 0 5px;
+        }
 
-.event-card .event-title {
-    padding-right: 35px; /* Leave room for the avatars */
-}
+        .star-rating span.filled {
+            color: #FFD700;
+        }
 
-/* Star System Styling */
-.star-rating span {
-    font-size: 2.5rem;
-    cursor: pointer;
-    color: #f0f0f0; /* Empty star color */
-    transition: color 0.2s, transform 0.1s;
-    display: inline-block;
-    padding: 0 5px;
-}
+        .chore-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
 
-.star-rating span.filled {
-    color: #FFD700; /* Gold earned star */
-}
+        #calendar-time-gutter {
+            height: 100%;
+            overflow-y: hidden !important;
+            position: relative;
+        }
 
-/* Ensure the chore card looks like your reference */
-.chore-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
+        .time-slot-label {
+            height: 100px;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 5px;
+            box-sizing: border-box;
+        }
 
-/* Force the gutter to have a scrollable area */
-#calendar-time-gutter {
-    height: 100%; /* Match the visible window */
-    overflow-y: hidden !important; /* Hide scrollbar but allow JS to scroll it */
-    position: relative;
-}
-
-/* Ensure the internal hours have enough height to actually scroll */
-.time-slot-label {
-    height: 100px; /* This MUST match the height of your grid rows exactly */
-    display: flex;
-    align-items: flex-start;
-    padding-top: 5px;
-    box-sizing: border-box;
-}
-
-
+        /* ========== DEBUG PANEL STYLES ========== */
+        #debug-panel {
+            position: fixed;
+            bottom: 50px;
+            right: 12px;
+            background: rgba(0,0,0,0.85);
+            color: #0f0;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            z-index: 9999;
+            display: none;
+            max-width: 280px;
+            line-height: 1.5;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        #debug-panel h4 {
+            margin: 0 0 8px 0;
+            color: #fff;
+            font-size: 12px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 6px;
+        }
+        #debug-panel .debug-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+        }
+        #debug-panel .debug-label {
+            color: #aaa;
+        }
+        #debug-panel .debug-value {
+            color: #0f0;
+            font-weight: 600;
+            text-align: right;
+            word-break: break-all;
+        }
+        #debug-panel .debug-value.error {
+            color: #ff4444;
+        }
+        #debug-panel .debug-value.warning {
+            color: #ffaa00;
+        }
+        #debug-btn {
+            position: fixed;
+            bottom: 50px;
+            right: 120px;
+            z-index: 9999;
+            padding: 8px 12px;
+            background: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,122,255,0.3);
+            transition: transform 0.1s;
+        }
+        #debug-btn:active {
+            transform: scale(0.95);
+        }
+        #debug-btn.active {
+            background: #34C759;
+        }
+        #export-log-btn {
+            position: fixed;
+            bottom: 50px;
+            right: 200px;
+            z-index: 9999;
+            padding: 8px 12px;
+            background: #5856D6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(88,86,214,0.3);
+            transition: transform 0.1s;
+            display: none;
+        }
+        #export-log-btn:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
@@ -470,10 +526,8 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
     <div class="modal-card">
         <h2>Family Event</h2>
         
-        <!-- Title Input -->
         <input type="text" id="evt-title" placeholder="Event Title (e.g. Piano Practice)" class="modal-input-lg">
         
-        <!-- Family Member Checkboxes -->
         <div class="family-tags">
             <label class="tag-check" style="--tag-color: #B5EAD7; --tag-text: #0277BD">
                 <input type="checkbox" value="E"> <span>Dad</span>
@@ -489,7 +543,6 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
             </label>
         </div>
 
-        <!-- Date & Time Row -->
         <div class="form-row">
             <div class="form-group" style="flex: 2;">
                 <label>DATE</label>
@@ -501,7 +554,6 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
             </div>
         </div>
 
-        <!-- End Time & Quick Add Row -->
         <div class="form-row">
             <div class="form-group" style="flex: 1;">
                 <label>END</label>
@@ -516,7 +568,6 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
             </div>
         </div>
 
-        <!-- Repeat Dropdown -->
         <div class="form-group">
             <label>REPEAT WEEKLY FOR...</label>
             <select id="evt-repeat" class="modal-input">
@@ -527,7 +578,6 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
             </select>
         </div>
 
-        <!-- Action Buttons -->
         <div class="modal-actions">
             <button class="btn-cancel" onclick="closeModal()">Cancel</button>
             <button class="btn-save" onclick="saveEvent()">Save Event</button>
@@ -536,9 +586,44 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
     </div>
 </div>
 
-
 <button id="fab-add" onclick="promptNewEvent()">+</button>
 
+<!-- ========== DEBUG BUTTONS ========== -->
+<button id="debug-btn" onclick="toggleDebug()">🐛 Debug</button>
+<button id="export-log-btn" onclick="exportLogs()">📋 Export Logs</button>
+
+<!-- ========== DEBUG PANEL ========== -->
+<div id="debug-panel">
+    <h4>🔋 Battery Debug Panel</h4>
+    <div class="debug-row">
+        <span class="debug-label">Battery API:</span>
+        <span class="debug-value" id="dbg-api">--</span>
+    </div>
+    <div class="debug-row">
+        <span class="debug-label">Level:</span>
+        <span class="debug-value" id="dbg-level">--</span>
+    </div>
+    <div class="debug-row">
+        <span class="debug-label">Charging:</span>
+        <span class="debug-value" id="dbg-charging">--</span>
+    </div>
+    <div class="debug-row">
+        <span class="debug-label">Charging Time:</span>
+        <span class="debug-value" id="dbg-charging-time">--</span>
+    </div>
+    <div class="debug-row">
+        <span class="debug-label">Discharging Time:</span>
+        <span class="debug-value" id="dbg-discharging-time">--</span>
+    </div>
+    <div class="debug-row">
+        <span class="debug-label">Last Error:</span>
+        <span class="debug-value" id="dbg-error">--</span>
+    </div>
+    <div class="debug-row" style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;">
+        <span class="debug-label">Log Count:</span>
+        <span class="debug-value" id="dbg-log-count">0</span>
+    </div>
+</div>
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
@@ -564,35 +649,178 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
     const NOTE_COLORS = ["var(--p-yellow)", "var(--p-blue)", "var(--p-green)", "var(--p-red)", "var(--p-purple)"];
 
     let currentDate = new Date();
-    let familyEvents = []; // START EMPTY: All data will now flow from Google
+    let familyEvents = [];
 
     let familyNotes = JSON.parse(localStorage.getItem('family_notes')) || [
         { id: 1, text: "Don't forget the milk! 🥛", color: "var(--p-yellow)", ts: Date.now() }
     ];
 
+    // ========== DEBUG PANEL FUNCTIONS ==========
+    let debugPanelOpen = false;
+    let batteryLogs = JSON.parse(localStorage.getItem('battery_logs') || '[]');
+    let batteryUpdateInterval = null;
+
+    function toggleDebug() {
+        const panel = document.getElementById('debug-panel');
+        const btn = document.getElementById('debug-btn');
+        const exportBtn = document.getElementById('export-log-btn');
+        
+        debugPanelOpen = !debugPanelOpen;
+        panel.style.display = debugPanelOpen ? 'block' : 'none';
+        btn.classList.toggle('active', debugPanelOpen);
+        exportBtn.style.display = debugPanelOpen ? 'block' : 'none';
+        
+        if (debugPanelOpen) {
+            debugBattery();
+            // Update every 3 seconds when panel is open
+            batteryUpdateInterval = setInterval(debugBattery, 3000);
+        } else {
+            if (batteryUpdateInterval) {
+                clearInterval(batteryUpdateInterval);
+                batteryUpdateInterval = null;
+            }
+        }
+    }
+
+    async function debugBattery() {
+        const apiEl = document.getElementById('dbg-api');
+        const levelEl = document.getElementById('dbg-level');
+        const chargingEl = document.getElementById('dbg-charging');
+        const chargingTimeEl = document.getElementById('dbg-charging-time');
+        const dischargingTimeEl = document.getElementById('dbg-discharging-time');
+        const errorEl = document.getElementById('dbg-error');
+        const logCountEl = document.getElementById('dbg-log-count');
+        
+        apiEl.innerText = 'getBattery' in navigator ? 'YES ✓' : 'NO ✗';
+        apiEl.classList.remove('error', 'warning');
+        if (!('getBattery' in navigator)) {
+            apiEl.classList.add('warning');
+        }
+        
+        if ('getBattery' in navigator) {
+            try {
+                const battery = await navigator.getBattery();
+                const level = Math.round(battery.level * 100);
+                const isCharging = battery.charging;
+                
+                levelEl.innerText = level + '%';
+                levelEl.classList.remove('warning');
+                if (level < 20) {
+                    levelEl.classList.add('warning');
+                }
+                
+                chargingEl.innerText = isCharging ? 'YES ⚡' : 'NO';
+                chargingEl.classList.remove('warning');
+                
+                // Charging/discharging time
+                chargingTimeEl.innerText = battery.chargingTime === Infinity ? 'N/A' : Math.round(battery.chargingTime / 60) + ' min';
+                dischargingTimeEl.innerText = battery.dischargingTime === Infinity ? 'N/A' : Math.round(battery.dischargingTime / 60) + ' min';
+                
+                errorEl.innerText = 'None';
+                errorEl.classList.remove('error');
+                
+                // Log this reading
+                logBatteryReading(level, isCharging, null);
+                
+            } catch (e) {
+                errorEl.innerText = e.message || 'Unknown error';
+                errorEl.classList.add('error');
+                levelEl.innerText = 'Error';
+                chargingEl.innerText = 'Error';
+                logBatteryReading(null, null, e.message);
+            }
+        } else {
+            levelEl.innerText = 'N/A';
+            chargingEl.innerText = 'N/A';
+            chargingTimeEl.innerText = 'N/A';
+            dischargingTimeEl.innerText = 'N/A';
+            errorEl.innerText = 'Battery API not supported on this device';
+            errorEl.classList.add('warning');
+            logBatteryReading(null, null, 'API not supported');
+        }
+        
+        logCountEl.innerText = batteryLogs.length;
+        
+        // Update status box as well
+        updateBatteryStatusDisplay();
+    }
+
+    function logBatteryReading(level, charging, error) {
+        const log = {
+            timestamp: new Date().toISOString(),
+            level: level,
+            charging: charging,
+            error: error
+        };
+        batteryLogs.push(log);
+        
+        // Keep only last 100 logs
+        if (batteryLogs.length > 100) {
+            batteryLogs = batteryLogs.slice(-100);
+        }
+        
+        localStorage.setItem('battery_logs', JSON.stringify(batteryLogs));
+    }
+
+    function exportLogs() {
+        if (batteryLogs.length === 0) {
+            alert('No logs to export yet!');
+            return;
+        }
+        
+        const logText = JSON.stringify(batteryLogs, null, 2);
+        navigator.clipboard.writeText(logText).then(() => {
+            alert('Logs copied to clipboard! (' + batteryLogs.length + ' entries)\n\nPaste into a text file or message to save.');
+        }).catch(err => {
+            alert('Failed to copy: ' + err.message);
+        });
+    }
+
+    async function updateBatteryStatusDisplay() {
+        const batEl = document.getElementById('bat-lvl');
+        if (!batEl) return;
+        
+        if ('getBattery' in navigator) {
+            try {
+                const battery = await navigator.getBattery();
+                const level = Math.round(battery.level * 100);
+                const icon = battery.charging ? '⚡' : '🔋';
+                batEl.innerText = `Battery: ${level}% ${icon}`;
+                
+                // Low battery warning
+                if (level < 20 && !battery.charging) {
+                    batEl.style.color = '#FF3B30';
+                } else {
+                    batEl.style.color = '';
+                }
+            } catch (e) {
+                batEl.innerText = 'Battery: Error';
+                batEl.style.color = '#FF3B30';
+            }
+        } else {
+            batEl.innerText = 'Battery: N/A';
+            batEl.style.color = '';
+        }
+    }
+    // ========== END DEBUG PANEL FUNCTIONS ==========
 
     function switchView(viewId, btn) {
-        // 1. Update Buttons
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // 2. Update Views
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         document.getElementById('view-' + viewId).classList.add('active');
 
-        // 3. Trigger Render for specific views
         if (viewId === 'calendar') renderCalendar();
         if (viewId === 'tasks') renderTasks();
         if (viewId === 'sticky') renderNotes();
     }
 
-    // --- HELPER FUNCTIONS ---
     function getStartOfWeek(d) { const date = new Date(d); const day = date.getDay(); const diff = date.getDate() - day; return new Date(date.setDate(diff)); }
     function isToday(d) { const t = new Date(); return d.getDate() === t.getDate() && d.getMonth() === t.getMonth(); }
     function isSameDay(d1, d2) { return d1.getDate() === d2.getDate() && d1.getMonth() === d2.getMonth(); }
     function formatTime(d) { return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
 
-    // --- WEATHER LOGIC ---
     const ICON_MAP = { "50": "clear-day", "51": "partly-cloudy-day", "52": "partly-cloudy-day", "53": "cloudy", "60": "rain", "64": "thunderstorms-rain" };
     async function refreshWeather() {
         try {
@@ -637,8 +865,6 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
     dragZone.addEventListener('touchmove', e => { const currentY = e.touches[0].clientY; const deltaY = currentY - startY; if (deltaY < 0) { drawer.style.top = deltaY + 'px'; } });
     dragZone.addEventListener('touchend', e => { const currentY = e.changedTouches[0].clientY; const deltaY = currentY - startY; drawer.style.transition = 'top 0.5s cubic-bezier(0.16, 1, 0.3, 1)'; if (deltaY < -80) { drawer.classList.remove('active'); drawer.style.top = '-110%'; } else { drawer.style.top = '0px'; } });
 
-    // --- VIEW RENDERS ---
-    
     function changeWeek(days) {
         currentViewDate.setDate(currentViewDate.getDate() + days);
         renderCalendar();
@@ -659,14 +885,11 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
         grid.innerHTML = ''; 
         gutter.innerHTML = '';
 
-        // FORCE extraction of the hour number
-        let sHour = 6; // Default
+        let sHour = 6;
         if (CONFIG.starthour) {
-            // If it's a string like "10:00", get the first part. If it's a number, use it.
             sHour = parseInt(CONFIG.starthour.toString().split(':')[0]) || 6;
         }
         
-        // Use currentViewDate instead of a hardcoded date
         for (let h = sHour; h <= 22; h++) {
             const lbl = document.createElement('div');
             lbl.className = 'time-label';
@@ -680,12 +903,9 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
             
             const col = document.createElement('div');
             const isWeekend = (displayDay.getDay() === 0 || displayDay.getDay() === 6);
-            
-            // FIXED: Using displayDay instead of undefined 'd'
             const isTodayDay = isToday(displayDay);
             col.className = `day-column ${isWeekend ? 'is-weekend' : ''} ${isTodayDay ? 'is-today' : ''}`;
             
-            // Visual polish for the header
             col.innerHTML = `
                 <div class="day-header" style="${isTodayDay ? 'border-bottom: 3px solid var(--accent);' : ''}">
                     <div class="day-name" style="${isTodayDay ? 'color: var(--accent);' : ''}">${displayDay.toLocaleDateString('en-US', {weekday: 'short'})}</div>
@@ -713,17 +933,14 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
 
             const col = document.createElement('div');
             
-            // 1. Correct logic for indicators
             const isWeekend = (d.getDay() === 0 || d.getDay() === 6);
             const isTodayDay = isToday(d);
             const dayEvents = familyEvents.filter(e => isSameDay(new Date(e.start), d));
             const hasHoliday = dayEvents.some(e => e.type === 'holiday');
             const holidayName = hasHoliday ? dayEvents.find(e => e.type === 'holiday').title : "";
 
-            // 2. APPLY CLASSES (Moved all logic into one clean string)
             col.className = `task-day ${isWeekend ? 'is-weekend' : ''} ${isTodayDay ? 'is-today' : ''} ${hasHoliday ? 'has-holiday' : ''}`;
 
-            // 3. SET CONTENT (Including Today & Holiday highlights)
             col.innerHTML = `
                 <div class="task-day-header">
                     <div style="${isTodayDay ? 'color: var(--accent); font-weight: 900;' : ''}">
@@ -733,13 +950,11 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
                 </div>
             `;
 
-            // 4. Add Today Border if applicable
             if (isTodayDay) {
                 col.style.border = "2px solid var(--accent)";
                 col.style.backgroundColor = "#F0F7FF";
             }
 
-            // 5. Render individual events
             dayEvents.forEach(evt => {
                 col.appendChild(createEventElement(evt, 'task'));
             });
@@ -760,7 +975,6 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
         const users = tags.map(t => SHORT_TAGS[t] || t.replace('#', ''));
         const avatars = users.map(u => `<div class="avatar-bubble" style="background:${USER_MAP[u]?.text || '#666'}">${u[0]}</div>`).join('');
 
-        // Apply background colors
         if (users.length > 1) {
             const stops = users.map((u, i) => `${USER_MAP[u]?.color || '#eee'} ${(100/users.length)*i}%, ${USER_MAP[u]?.color || '#eee'} ${(100/users.length)*(i+1)}%`).join(', ');
             el.style.background = `linear-gradient(135deg, ${stops})`;
@@ -772,30 +986,25 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
             let displayHour = start.getHours();
             let displayMin = start.getMinutes();
             
-            // 1. Force sHour to a clean number from CONFIG
             const sHour = parseInt(CONFIG.starthour?.toString().split(':')[0]) || 6;
 
-            // 2. SNAP LOGIC: If starts before grid, visually show at top
             if (displayHour < sHour) {
                 displayHour = sHour;
                 displayMin = 0;
             }
 
-            // 3. Position Calculation (Fixed duplicate 'top' declaration)
             const topPos = (displayHour - sHour) * CONFIG.hourHeight + (displayMin / 60) * CONFIG.hourHeight;
             el.style.top = `calc(60px + ${topPos}px)`;
             
             let h = ((end - start) / 3600000) * CONFIG.hourHeight;
             el.style.height = Math.max(h, 45) + 'px'; 
 
-            // 4. Visual Layout: Avatars anchored to the RIGHT
             el.innerHTML = `
                 <div class="event-title" style="padding-right: 35px;">${evt.title.replace(/#\w+/g, '')}</div>
                 <div class="event-time">${formatTime(start)}</div>
                 <div class="avatar-stack" style="right: 8px; left: auto; flex-direction: row-reverse;">${avatars}</div>
             `;
         } else {
-            // Task View Mega Bubble
             el.innerHTML = `
                 <div class="event-time" style="font-weight:800; color:black; margin-bottom:5px;">${formatTime(start)}</div>
                 <div class="event-title" style="font-size:1.3rem;">${evt.title.replace(/#\w+/g, '')}</div>
@@ -807,398 +1016,277 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
         return el;
     }
 
-// --- EVENT MANAGEMENT (Restored) ---
-// --- NEW EVENT MODAL LOGIC ---
-let currentEditingId = null;
+    let currentEditingId = null;
 
-function promptNewEvent() {
-    currentEditingId = null; // New mode
-    document.getElementById('evt-title').value = "";
-    document.querySelectorAll('.tag-check input').forEach(i => i.checked = false);
-    
-    // Default to today 9AM
-    const now = new Date();
-    document.getElementById('evt-date').value = now.toISOString().split('T')[0];
-    document.getElementById('evt-start').value = "09:00";
-    document.getElementById('evt-end').value = "10:00";
-    document.getElementById('evt-repeat').value = "none";
-    
-    document.getElementById('btn-delete').style.display = 'none';
-    document.getElementById('event-modal-overlay').style.display = 'flex';
-}
-
-function editEvent(id) {
-    const evt = familyEvents.find(e => e.id === id);
-    if (!evt) return;
-    
-    currentEditingId = id;
-    // Clean the title for the input box
-    document.getElementById('evt-title').value = evt.title.replace(/#\w+/g, '').trim();
-    
-    // FIXED: Check checkboxes by looking for the #Tag in the event title
-    document.querySelectorAll('.tag-check input').forEach(input => {
-        // This looks for "#L", "#M", etc., inside the title string
-        const tagToLookFor = "#" + input.value; 
-        input.checked = evt.title.includes(tagToLookFor);
-    });
-
-    const start = new Date(evt.start);
-    const end = new Date(evt.end);
-    
-    document.getElementById('evt-date').value = start.toISOString().split('T')[0];
-    document.getElementById('evt-start').value = formatInputTime(start);
-    document.getElementById('evt-end').value = formatInputTime(end);
-    document.getElementById('evt-repeat').value = "none";
-    
-    document.getElementById('btn-delete').style.display = 'block';
-    document.getElementById('event-modal-overlay').style.display = 'flex';
-}
-
-function saveEvent() {
-    const titleBase = document.getElementById('evt-title').value;
-    if (!titleBase) return alert("Please enter a title");
-
-    // Reconstruct tags
-    let tags = "";
-    document.querySelectorAll('.tag-check input:checked').forEach(i => {
-        tags += " #" + i.value;
-    });
-    const finalTitle = titleBase + tags;
-
-    // Construct Dates
-    const dateStr = document.getElementById('evt-date').value;
-    const startStr = document.getElementById('evt-start').value;
-    const endStr = document.getElementById('evt-end').value;
-    
-    const startObj = new Date(`${dateStr}T${startStr}`);
-    const endObj = new Date(`${dateStr}T${endStr}`);
-
-    if (currentEditingId) {
-        // UPDATE EXISTING
-        const evt = familyEvents.find(e => e.id === currentEditingId);
-        evt.title = finalTitle;
-        evt.start = startObj.toISOString();
-        evt.end = endObj.toISOString();
-    } else {
-        // CREATE NEW
-        const repeatCount = document.getElementById('evt-repeat').value === "none" ? 1 : parseInt(document.getElementById('evt-repeat').value);
+    function promptNewEvent() {
+        currentEditingId = null;
+        document.getElementById('evt-title').value = "";
+        document.querySelectorAll('.tag-check input').forEach(i => i.checked = false);
         
-        for(let i=0; i<repeatCount; i++) {
-            let nextStart = new Date(startObj);
-            nextStart.setDate(startObj.getDate() + (i * 7));
-            let nextEnd = new Date(endObj);
-            nextEnd.setDate(endObj.getDate() + (i * 7));
-            
-            familyEvents.push({
-                id: Date.now() + i,
-                title: finalTitle,
-                start: nextStart.toISOString(),
-                end: nextEnd.toISOString()
-            });
-        }
+        const now = new Date();
+        document.getElementById('evt-date').value = now.toISOString().split('T')[0];
+        document.getElementById('evt-start').value = "09:00";
+        document.getElementById('evt-end').value = "10:00";
+        document.getElementById('evt-repeat').value = "none";
+        
+        document.getElementById('btn-delete').style.display = 'none';
+        document.getElementById('event-modal-overlay').style.display = 'flex';
     }
 
-    closeModal();
-    renderCalendar();
-    renderTasks();
-}
+    function editEvent(id) {
+        const evt = familyEvents.find(e => e.id === id);
+        if (!evt) return;
+        
+        currentEditingId = id;
+        document.getElementById('evt-title').value = evt.title.replace(/#\w+/g, '').trim();
+        
+        document.querySelectorAll('.tag-check input').forEach(input => {
+            const tagToLookFor = "#" + input.value; 
+            input.checked = evt.title.includes(tagToLookFor);
+        });
 
-function deleteEvent() {
-    if(confirm("Delete this event?")) {
-        familyEvents = familyEvents.filter(e => e.id !== currentEditingId);
+        const start = new Date(evt.start);
+        const end = new Date(evt.end);
+        
+        document.getElementById('evt-date').value = start.toISOString().split('T')[0];
+        document.getElementById('evt-start').value = formatInputTime(start);
+        document.getElementById('evt-end').value = formatInputTime(end);
+        document.getElementById('evt-repeat').value = "none";
+        
+        document.getElementById('btn-delete').style.display = 'block';
+        document.getElementById('event-modal-overlay').style.display = 'flex';
+    }
+
+    function saveEvent() {
+        const titleBase = document.getElementById('evt-title').value;
+        if (!titleBase) return alert("Please enter a title");
+
+        let tags = "";
+        document.querySelectorAll('.tag-check input:checked').forEach(i => {
+            tags += " #" + i.value;
+        });
+        const finalTitle = titleBase + tags;
+
+        const dateStr = document.getElementById('evt-date').value;
+        const startStr = document.getElementById('evt-start').value;
+        const endStr = document.getElementById('evt-end').value;
+        
+        const startObj = new Date(`${dateStr}T${startStr}`);
+        const endObj = new Date(`${dateStr}T${endStr}`);
+
+        if (currentEditingId) {
+            const evt = familyEvents.find(e => e.id === currentEditingId);
+            evt.title = finalTitle;
+            evt.start = startObj.toISOString();
+            evt.end = endObj.toISOString();
+        } else {
+            const repeatCount = document.getElementById('evt-repeat').value === "none" ? 1 : parseInt(document.getElementById('evt-repeat').value);
+            
+            for(let i=0; i<repeatCount; i++) {
+                let nextStart = new Date(startObj);
+                nextStart.setDate(startObj.getDate() + (i * 7));
+                let nextEnd = new Date(endObj);
+                nextEnd.setDate(endObj.getDate() + (i * 7));
+                
+                familyEvents.push({
+                    id: Date.now() + i,
+                    title: finalTitle,
+                    start: nextStart.toISOString(),
+                    end: nextEnd.toISOString()
+                });
+            }
+        }
+
         closeModal();
         renderCalendar();
         renderTasks();
     }
-}
 
-function closeModal() {
-    document.getElementById('event-modal-overlay').style.display = 'none';
-}
-
-function adjustTime(minutes) {
-    const startEl = document.getElementById('evt-start');
-    const endEl = document.getElementById('evt-end');
-    if(!startEl.value) return;
-    
-    // Create date objects just to manipulate time easily
-    const base = new Date(`2000-01-01T${startEl.value}`);
-    const newEnd = new Date(base.getTime() + minutes * 60000);
-    endEl.value = formatInputTime(newEnd);
-}
-
-function formatInputTime(date) {
-    return date.toTimeString().substring(0,5);
-}
-
-
-    function updateSystem() { const now = new Date(); const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0'); document.getElementById('sleep-screen').style.display = (timeStr >= CONFIG.sleepStart || timeStr < CONFIG.sleepEnd) ? 'flex' : 'none'; document.getElementById('dim-clock').innerText = timeStr; if(navigator.getBattery) navigator.getBattery().then(b => { document.getElementById('bat-lvl').innerText = `Battery: ${Math.round(b.level*100)}%`; }); document.getElementById('sync-ts').innerText = `Sync: ${timeStr}`; }
-    function toggleWeatherDrawer() { const d = document.getElementById('weather-drawer'); d.classList.toggle('active'); d.style.top = d.classList.contains('active') ? '0' : '-110%'; }
-
-// --- SYSTEM HELPERS ---
-function updateClock() {
-    const now = new Date();
-    // 1. Update the time text only
-    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-    const clockEl = document.getElementById('dim-clock');
-    if (clockEl) clockEl.innerText = timeStr;
-
-    // 2. Update battery if available
-    if (navigator.getBattery) {
-        navigator.getBattery().then(battery => {
-            const batEl = document.getElementById('bat-lvl');
-            if (batEl) batEl.innerText = `Battery: ${Math.round(battery.level * 100)}%`;
-        });
-    }
-}
-
-function resetIdleTimer() {
-    if (typeof idleLogoutTimer !== 'undefined') clearTimeout(idleLogoutTimer);
-    
-    // Wake up immediately on touch
-    const sleepDiv = document.getElementById('sleep-screen');
-    if (sleepDiv && sleepDiv.style.display === 'flex') {
-        sleepDiv.style.display = 'none';
-        console.log("Activity detected: Waking up.");
-    }
-
-    // Set a fresh 5-minute countdown (300,000ms)
-    idleLogoutTimer = setTimeout(() => {
-        const now = new Date();
-        const hr = now.getHours().toString().padStart(2, '0');
-        const min = now.getMinutes().toString().padStart(2, '0');
-        const currentTime = `${hr}:${min}`;
-        
-        // ONLY sleep if within the window set in your Google Sheet
-        const isSleepTime = (currentTime >= CONFIG.sleepStart || currentTime < CONFIG.sleepEnd);
-        
-        if (isSleepTime && sleepDiv) {
-            console.log("5 minutes inactive during sleep hours. Dimming.");
-            sleepDiv.style.display = 'flex';
+    function deleteEvent() {
+        if(confirm("Delete this event?")) {
+            familyEvents = familyEvents.filter(e => e.id !== currentEditingId);
+            closeModal();
+            renderCalendar();
+            renderTasks();
         }
-    }, 300000); 
-}
-
-function wakeUp() {
-    const sleepScreen = document.getElementById('sleep-screen');
-    if (sleepScreen) {
-        sleepScreen.style.display = 'none';
-        console.log("iPad Awake");
     }
-}
+
+    function closeModal() {
+        document.getElementById('event-modal-overlay').style.display = 'none';
+    }
+
+    function adjustTime(minutes) {
+        const startEl = document.getElementById('evt-start');
+        const endEl = document.getElementById('evt-end');
+        if(!startEl.value) return;
+        
+        const base = new Date(`2000-01-01T${startEl.value}`);
+        const newEnd = new Date(base.getTime() + minutes * 60000);
+        endEl.value = formatInputTime(newEnd);
+    }
+
+    function formatInputTime(date) {
+        return date.toTimeString().substring(0,5);
+    }
+
+    function toggleWeatherDrawer() { 
+        const d = document.getElementById('weather-drawer'); 
+        d.classList.toggle('active'); 
+        d.style.top = d.classList.contains('active') ? '0' : '-110%'; 
+    }
+
+    function updateClock() {
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+        const clockEl = document.getElementById('dim-clock');
+        if (clockEl) clockEl.innerText = timeStr;
+
+        // Use the improved battery status function
+        updateBatteryStatusDisplay();
+    }
+
+    function resetIdleTimer() {
+        if (typeof idleLogoutTimer !== 'undefined') clearTimeout(idleLogoutTimer);
+        
+        const sleepDiv = document.getElementById('sleep-screen');
+        if (sleepDiv && sleepDiv.style.display === 'flex') {
+            sleepDiv.style.display = 'none';
+            console.log("Activity detected: Waking up.");
+        }
+
+        idleLogoutTimer = setTimeout(() => {
+            const now = new Date();
+            const hr = now.getHours().toString().padStart(2, '0');
+            const min = now.getMinutes().toString().padStart(2, '0');
+            const currentTime = `${hr}:${min}`;
+            
+            const isSleepTime = (currentTime >= CONFIG.sleepStart || currentTime < CONFIG.sleepEnd);
+            
+            if (isSleepTime && sleepDiv) {
+                console.log("5 minutes inactive during sleep hours. Dimming.");
+                sleepDiv.style.display = 'flex';
+            }
+        }, 300000); 
+    }
+
+    function wakeUp() {
+        const sleepScreen = document.getElementById('sleep-screen');
+        if (sleepScreen) {
+            sleepScreen.style.display = 'none';
+            console.log("iPad Awake");
+        }
+    }
 
     async function init() {
-        // 1. Setup Core System
         window.addEventListener('mousedown', resetIdleTimer);
         window.addEventListener('touchstart', resetIdleTimer);
-        window.addEventListener('mousemove', resetIdleTimer); // Added for mouse/stylus users
+        window.addEventListener('mousemove', resetIdleTimer);
         updateClock(); 
         resetIdleTimer();
         
-        // 2. Initial Cloud Sync (This fills familyEvents and CONFIG)
         await syncCloudData(); 
-
-        // 3. Weather Fetch
         await refreshWeather(); 
-
-        // 4. Set Refresh Intervals
+        
         setInterval(updateClock, 30000);
-        setInterval(syncCloudData, 300000); // Re-sync every 5 mins
+        setInterval(syncCloudData, 300000);
         setInterval(refreshWeather, 600000);
+        
+        // Initialize battery logging every minute
+        setInterval(() => {
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(battery => {
+                    logBatteryReading(Math.round(battery.level * 100), battery.charging, null);
+                }).catch(e => {
+                    logBatteryReading(null, null, e.message);
+                });
+            } else {
+                logBatteryReading(null, null, 'API not supported');
+            }
+        }, 60000);
     }
     window.onload = init;
 
-function renderNotes() {
-    const grid = document.getElementById('notes-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    familyNotes.forEach(note => {
-        const el = document.createElement('div');
-        el.className = 'sticky-note';
-        el.style.backgroundColor = note.color;
-        el.style.transform = `rotate(${(Math.random() * 4 - 2)}deg)`;
-        el.innerHTML = `
-            <div class="note-text">${note.text}</div>
-            <div class="note-meta">${new Date(note.ts).toLocaleDateString()}</div>
-        `;
-        el.ondblclick = () => {
-            familyNotes = familyNotes.filter(n => n.id !== note.id);
-            localStorage.setItem('family_notes', JSON.stringify(familyNotes));
-            renderNotes();
-        };
-        grid.appendChild(el);
-    });
-}
-
-//////
-const API_URL = "https://script.google.com/macros/s/AKfycbx6_9L8yNfkIQHXxHWa7pXlphdaFggFlACl8GC61WYsvJDufjqNPh_q_9F2nzPfMyA/exec";
-
-async function syncCloudData() {
-    console.log("Starting Sync...");
-    try {
-        const response = await fetch(API_URL, { method: 'GET', mode: 'cors', redirect: 'follow' });
-        const data = await response.json();
-
-        // 1. Update CONFIG from Google Sheets
-        if (data.settings) {
-            Object.assign(CONFIG, data.settings);
-            // Fix: Ensure tripDate is a valid date string for the countdown
-            if (CONFIG.tripDate && CONFIG.tripDate.includes('T')) {
-                CONFIG.tripDate = CONFIG.tripDate.split('T')[0];
-            }       
-            console.log("Config Synced. Sleep Start:", CONFIG.sleepStart);
-                    
-            // Calculate Countdown dynamically
-            if (data.settings.tripDate) {
-                const tripDate = new Date(data.settings.tripDate);
-                const today = new Date();
-                const diff = Math.ceil((tripDate - today) / (1000 * 60 * 60 * 24));
-                
-                document.querySelector('.countdown-label span:first-child').innerText = data.settings.tripTitle || "Trip";
-                document.getElementById('days-text').innerText = `${diff} Days Until`;
-                
-                // Set progress bar (assuming a 30-day "hype" window)
-                const progress = Math.max(0, Math.min(100, (1 - (diff / 30)) * 100));
-                document.getElementById('countdown-fill').style.width = `${progress}%`;
-            }
-        }
-
-        // 2. Load Events (This fills the calendar)
-        familyEvents = data.events || [];
-        console.log("Sync Successful. Events found:", familyEvents.length);
-
-        // 3. REMOVED: The jump logic. We stay on the current week.
-        
-        // 4. Refresh all UI components
-        renderCalendar();
-        renderTasks();
-        renderGoalStars(data.goals);
-        updateCountdown();
-        renderNotes();
-
-        // Update footer timestamp
-        const syncTs = document.getElementById('sync-ts');
-        if (syncTs) syncTs.innerText = `Sync: ${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
-
-        return data; 
-    } catch (error) { console.error("Sync Failed:", error); }
-}
-
-// This function sends the data to Google Sheets when you tap a star
-async function updateStarsInCloud(kid, rewardName, count) {
-    try {
-        await fetch(API_URL, {
-            method: 'POST',
-            mode: 'no-cors', // Essential for Google Apps Script
-            body: JSON.stringify({
-                action: 'updateStars',
-                kid: kid,
-                reward: rewardName,
-                count: count
-            })
+    function renderNotes() {
+        const grid = document.getElementById('notes-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        familyNotes.forEach(note => {
+            const el = document.createElement('div');
+            el.className = 'sticky-note';
+            el.style.backgroundColor = note.color;
+            el.style.transform = `rotate(${(Math.random() * 4 - 2)}deg)`;
+            el.innerHTML = `
+                <div class="note-text">${note.text}</div>
+                <div class="note-meta">${new Date(note.ts).toLocaleDateString()}</div>
+            `;
+            el.ondblclick = () => {
+                familyNotes = familyNotes.filter(n => n.id !== note.id);
+                localStorage.setItem('family_notes', JSON.stringify(familyNotes));
+                renderNotes();
+            };
+            grid.appendChild(el);
         });
-        console.log(`Cloud Updated: ${kid} -> ${count} stars for ${rewardName}`);
-    } catch (e) { console.error("Star sync failed:", e); }
-}
+    }
 
-// FIXED: Passes data directly to avoid searching the DOM
-async function addStar(starSpan, kidName, goalName, newCount) {
-    // 1. Instant Visual Feedback
-    const starContainer = starSpan.parentElement;
-    const allStars = starContainer.querySelectorAll('span');
-    
-    allStars.forEach((s, i) => {
-        if (i < newCount) s.classList.add('filled');
-        else s.classList.remove('filled');
-    });
+    const API_URL = "https://script.google.com/macros/s/AKfycbx6_9L8yNfkIQHXxHWa7pXlphdaFggFlACl8GC61WYsvJDufjqNPh_q_9F2nzPfMyA/exec";
 
-    // 2. Trigger the sync you confirmed is already working
-    await updateStarsInCloud(kidName, goalName, newCount);
-}
+    async function syncCloudData() {
+        console.log("Starting Sync...");
+        try {
+            const response = await fetch(API_URL, { method: 'GET', mode: 'cors', redirect: 'follow' });
+            const data = await response.json();
 
-// Ensure renderGoalStars matches the new toggle function
-function renderGoalStars(goalsData) {
-    const containers = {
-        'Laelynn': document.getElementById('chores-laelynn'),
-        'Makayla': document.getElementById('chores-makayla')
-    };
+            if (data.settings) {
+                Object.assign(CONFIG, data.settings);
+                if (CONFIG.tripDate && CONFIG.tripDate.includes('T')) {
+                    CONFIG.tripDate = CONFIG.tripDate.split('T')[0];
+                }       
+                console.log("Config Synced. Sleep Start:", CONFIG.sleepStart);
+                        
+                if (data.settings.tripDate) {
+                    const tripDate = new Date(data.settings.tripDate);
+                    const today = new Date();
+                    const diff = Math.ceil((tripDate - today) / (1000 * 60 * 60 * 24));
+                    
+                    document.querySelector('.countdown-label span:first-child').innerText = data.settings.tripTitle || "Trip";
+                    document.getElementById('days-text').innerText = `${diff} Days Until`;
+                    
+                    const progress = Math.max(0, Math.min(100, (1 - (diff / 30)) * 100));
+                    document.getElementById('countdown-fill').style.width = `${progress}%`;
+                }
+            }
 
-    // Clear old data but keep the containers
-    Object.values(containers).forEach(c => { if(c) c.innerHTML = ''; });
+            familyEvents = data.events || [];
+            console.log("Sync Successful. Events found:", familyEvents.length);
 
-    if (!goalsData) return;
+            renderCalendar();
+            renderTasks();
+            if (typeof renderGoalStars === 'function') renderGoalStars(data.goals);
+            if (typeof updateCountdown === 'function') updateCountdown();
+            renderNotes();
 
-    goalsData.forEach(goal => {
-        const parent = containers[goal.Owner];
-        if (!parent) return;
+            const syncTs = new Date().toLocaleTimeString();
+            document.getElementById('sync-ts').innerText = `Sync: ${syncTs}`;
 
-        const card = document.createElement('div');
-        card.className = 'chore-card';
-        
-        const target = parseInt(goal.TargetStars) || 0;
-        const current = parseInt(goal.CurrentStars) || 0;
-        
-        // Build the stars using the hardcoded visual logic
-        let starsHtml = '';
-        for(let i = 1; i <= target; i++) {
-            const isFilled = i <= current ? 'filled' : '';
-            starsHtml += `<span class="${isFilled}" onclick="addStar(this, '${goal.Owner}', '${goal.GoalName}', ${i})">☆</span>`;
+        } catch (e) {
+            console.error("Sync failed:", e);
+            document.getElementById('sync-ts').innerText = `Sync: ERROR`;
         }
-        
-        // Match the text labels from your visual reference
-        const rewardLabel = goal.IsYouTube == 1 
-            ? `📺 ${goal.YTMins}m YouTube` 
-            : `🎁 ${goal.PhysicalPrize || 'Surprise!'}`;
-
-        card.innerHTML = `
-            <div class="chore-header" style="margin-bottom:10px;">
-                <span style="font-size:1.1rem; font-weight:600;">${goal.GoalName}</span>
-                <span style="color:#888; margin-left:10px;">${rewardLabel}</span>
-            </div>
-            <div class="star-rating">${starsHtml}</div>
-        `;
-        parent.appendChild(card);
-    });
-}
-
-function updateCountdown() {
-    if (!CONFIG.tripDate) return;
-    const target = new Date(CONFIG.tripDate);
-    const now = new Date();
-    const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
-    
-    const countdownEl = document.querySelector('.Japan-Trip-Countdown'); // Adjust selector as needed
-    if (countdownEl) {
-        countdownEl.innerText = diff > 0 ? `${diff} Days Until` : "Time to go! ✈️";
     }
-}
 
-function initScrollSync() {
-    const grid = document.getElementById('calendar-grid');
-    const gutter = document.getElementById('calendar-time-gutter');
-
-    if (grid && gutter) {
-        // Sync the internal heights
-        const syncHeight = () => {
-            // This ensures the gutter content is as long as the grid content
-            gutter.style.height = grid.clientHeight + "px";
+    function promptNewNote() {
+        const text = prompt("Enter note text:");
+        if (!text) return;
+        const note = {
+            id: Date.now(),
+            text: text,
+            color: NOTE_COLORS[Math.floor(Math.random() * NOTE_COLORS.length)],
+            ts: Date.now()
         };
-
-        grid.addEventListener('scroll', () => {
-            gutter.scrollTop = grid.scrollTop;
-        }, { passive: true });
-
-        window.addEventListener('resize', syncHeight);
-        syncHeight();
-        console.log("🚀 Scroll Sync Locked & Loaded");
+        familyNotes.push(note);
+        localStorage.setItem('family_notes', JSON.stringify(familyNotes));
+        renderNotes();
     }
-}
-
-// Call this AFTER your calendar events are rendered
-setTimeout(initScrollSync, 1500);
-
 </script>
-
-
 </body>
 </html>
