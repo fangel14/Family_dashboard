@@ -367,6 +367,18 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
     box-sizing: border-box;
 }
 
+#weather-warning {
+    font-weight: 900;
+    font-size: 1.2rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-right: 8px;
+    display: none; /* Hidden by default when clear */
+}
+.warn-typhoon { background: #FF9500; color: white; }
+.warn-red { background: #FF3B30; color: white; }
+.warn-black { background: #000000; color: #FF3B30; border: 2px solid #FF3B30; }
+.warn-clear { display: inline-block !important; color: #34C759; background: none; }
 
     </style>
 </head>
@@ -397,6 +409,7 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
         <img id="weather-icon" class="weather-img" src="https://basmilius.github.io/weather-icons/production/fill/all/clear-day.svg">
         <div class="weather-info">
             <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span id="weather-warning">🟢 All clear</span>
                 <span id="current-temp">--°C</span>
                 <span id="current-humidity">--% RH</span>
             </div>
@@ -463,8 +476,6 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
         <div id="notes-grid"></div>
     </div>
 </main>
-
-<div id="status-box"><div id="bat-lvl">Battery: --%</div><div id="sync-ts">Sync: --:--</div></div>
 
 <div id="event-modal-overlay" class="modal-overlay" style="display: none;">
     <div class="modal-card">
@@ -607,6 +618,7 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
             const fData = await fRes.json();
             renderForecast(fData.weatherForecast.slice(0, 5));
             document.getElementById('weather-desc').innerText = "Fine";
+            await fetchWeatherWarnings();
         } catch (e) { document.getElementById('weather-desc').innerText = "Sync Offline"; }
     }
 
@@ -932,7 +944,7 @@ function formatInputTime(date) {
 }
 
 
-    function updateSystem() { const now = new Date(); const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0'); document.getElementById('sleep-screen').style.display = (timeStr >= CONFIG.sleepStart || timeStr < CONFIG.sleepEnd) ? 'flex' : 'none'; document.getElementById('dim-clock').innerText = timeStr; if(navigator.getBattery) navigator.getBattery().then(b => { document.getElementById('bat-lvl').innerText = `Battery: ${Math.round(b.level*100)}%`; }); document.getElementById('sync-ts').innerText = `Sync: ${timeStr}`; }
+    function updateSystem() { const now = new Date(); const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0'); document.getElementById('sleep-screen').style.display = (timeStr >= CONFIG.sleepStart || timeStr < CONFIG.sleepEnd) ? 'flex' : 'none'; document.getElementById('dim-clock').innerText = timeStr; document.getElementById('sync-ts').innerText = `Sync: ${timeStr}`; }
     function toggleWeatherDrawer() { const d = document.getElementById('weather-drawer'); d.classList.toggle('active'); d.style.top = d.classList.contains('active') ? '0' : '-110%'; }
 
 // --- SYSTEM HELPERS ---
@@ -942,14 +954,6 @@ function updateClock() {
     const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
     const clockEl = document.getElementById('dim-clock');
     if (clockEl) clockEl.innerText = timeStr;
-
-    // 2. Update battery if available
-    if (navigator.getBattery) {
-        navigator.getBattery().then(battery => {
-            const batEl = document.getElementById('bat-lvl');
-            if (batEl) batEl.innerText = `Battery: ${Math.round(battery.level * 100)}%`;
-        });
-    }
 }
 
 function resetIdleTimer() {
@@ -1191,6 +1195,47 @@ function initScrollSync() {
         window.addEventListener('resize', syncHeight);
         syncHeight();
         console.log("🚀 Scroll Sync Locked & Loaded");
+    }
+}
+
+async function fetchWeatherWarnings() {
+    const warnEl = document.getElementById('weather-warning');
+    if (!warnEl) return;
+
+    try {
+        const res = await fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=warnsum&lang=en');
+        const data = await res.json();
+        
+        warnEl.className = ""; // Reset classes
+        
+        if (!data || Object.keys(data).length === 0) {
+            warnEl.innerText = "🟢 All clear";
+            warnEl.classList.add('warn-clear');
+            return;
+        }
+
+        const codes = Object.keys(data);
+        // Priority check: Black Rain > Red Rain > Typhoon
+        if (codes.includes('WRAINB')) {
+            warnEl.innerText = "⚫ Black Rain";
+            warnEl.classList.add('warn-black');
+        } else if (codes.includes('WRAINR')) {
+            warnEl.innerText = "🔴 Red Rain";
+            warnEl.classList.add('warn-red');
+        } else {
+            const typhoon = codes.find(c => c.startsWith('WTC'));
+            if (typhoon) {
+                const signal = typhoon.replace('WTC', '');
+                warnEl.innerText = `🌀 Typhoon #${signal}`;
+                warnEl.classList.add('warn-typhoon');
+            } else {
+                warnEl.innerText = "🟢 All clear";
+                warnEl.classList.add('warn-clear');
+            }
+        }
+        warnEl.style.display = "inline-block";
+    } catch (e) {
+        console.error("Warning API Offline", e);
     }
 }
 
