@@ -406,10 +406,11 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
         <div class="progress-outer"><div id="countdown-fill"></div></div>
     </div>
     <div class="weather-block" onclick="toggleWeatherDrawer()">
-        <img id="weather-icon" class="weather-img" src="https://basmilius.github.io/weather-icons/production/fill/all/clear-day.svg">
+        <img id="weather-icon" class="weather-img" src="https://cdn.jsdelivr.net/gh/basmilius/meteocons@v2.0/svg/">
         <div class="weather-info">
             <div style="display: flex; align-items: baseline; gap: 8px;">
-                <span id="weather-warning">🟢 All clear</span>
+                <img id="warning-icon" src="" style="width: 30px; height: 30px; display: none;" />
+                <span id="weather-warning" class="warn-clear">All clear</span>
                 <span id="current-temp">--°C</span>
                 <span id="current-humidity">--% RH</span>
             </div>
@@ -557,6 +558,15 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
     let currentViewDate = getStartOfWeek(new Date());
 
     const CONFIG = { };
+
+    const ICON_BASE_URL = 'https://cdn.meteocons.com/latest/svg/fill/'; // Updated to new CDN structure
+
+    const ICON_MAP = {
+        "50": "clear-day", "51": "clear-day", "52": "partly-cloudy-day", 
+        "53": "cloudy", "54": "cloudy", "60": "rain", "61": "rain", 
+        "62": "rain", "63": "rain", "64": "thunderstorms-day-rain", 
+        "65": "thunderstorms-rain", "typhoon": "thunderstorms-typhoon"
+    };
     
     const SHORT_TAGS = {
     "#L": "Laelynn",
@@ -604,22 +614,23 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
     function formatTime(d) { return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
 
     // --- WEATHER LOGIC ---
-    const ICON_MAP = { "50": "clear-day", "51": "partly-cloudy-day", "52": "partly-cloudy-day", "53": "cloudy", "60": "rain", "64": "thunderstorms-rain" };
     async function refreshWeather() {
         try {
             const res = await fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en');
             const data = await res.json();
+            
+            // Temp & Humidity
             const ssp = data.temperature.data.find(s => s.place === "Sham Shui Po");
             if(ssp) document.getElementById('current-temp').innerText = ssp.value + "°C";
             document.getElementById('current-humidity').innerText = data.humidity.data[0].value + "% RH";
+            
+            // Main Icon Fix (Using Meteocons)
             const iconCode = data.icon[0];
-            document.getElementById('weather-icon').src = `https://basmilius.github.io/weather-icons/production/fill/all/${ICON_MAP[iconCode] || 'clear-day'}.svg`;
-            const fRes = await fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en');
-            const fData = await fRes.json();
-            renderForecast(fData.weatherForecast.slice(0, 5));
-            document.getElementById('weather-desc').innerText = "Fine";
+            const iconName = ICON_MAP[iconCode] || 'clear-day';
+            document.getElementById('weather-icon').src = `${ICON_BASE_URL}${iconName}.svg`;
+            
             await fetchWeatherWarnings();
-        } catch (e) { document.getElementById('weather-desc').innerText = "Sync Offline"; }
+        } catch (e) { console.error("Weather Sync Failed", e); }
     }
 
     function renderForecast(forecasts) {
@@ -634,7 +645,7 @@ label { display: block; font-size: 0.7rem; font-weight: 800; color: #8E8E93; mar
             container.innerHTML += `
                 <div class="forecast-card">
                     <div class="fc-day">${dateObj.toLocaleDateString('en-US', {weekday: 'short'})}</div>
-                    <img class="fc-icon" src="https://basmilius.github.io/weather-icons/production/fill/all/${ICON_MAP[f.ForecastIcon] || 'clear-day'}.svg">
+                    <img class="fc-icon" src="${ICON_BASE_URL}${ICON_MAP[f.ForecastIcon] || 'clear-day'}.svg">
                     <div class="fc-temp">${f.forecastMintemp.value}° - ${f.forecastMaxtemp.value}°</div>
                     <div class="psr-label">💧 ${f.PSR || 'Low'}</div>
                 </div>`;
@@ -1200,43 +1211,31 @@ function initScrollSync() {
 
 async function fetchWeatherWarnings() {
     const warnEl = document.getElementById('weather-warning');
-    if (!warnEl) return;
-
+    const warnIcon = document.getElementById('warning-icon'); 
     try {
         const res = await fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=warnsum&lang=en');
         const data = await res.json();
         
-        warnEl.className = ""; // Reset classes
-        
-        if (!data || Object.keys(data).length === 0) {
-            warnEl.innerText = "🟢 All clear";
-            warnEl.classList.add('warn-clear');
-            return;
-        }
+        warnEl.className = "warn-clear"; 
+        warnEl.innerText = "All clear";
+        warnIcon.style.display = "none";
+
+        if (!data || Object.keys(data).length === 0) return;
 
         const codes = Object.keys(data);
-        // Priority check: Black Rain > Red Rain > Typhoon
-        if (codes.includes('WRAINB')) {
-            warnEl.innerText = "⚫ Black Rain";
-            warnEl.classList.add('warn-black');
+        const typhoon = codes.find(c => c.startsWith('WTC'));
+        
+        if (typhoon) {
+            warnEl.innerText = `Signal #${typhoon.replace('WTC', '')}`;
+            warnEl.className = "warn-typhoon";
+            warnIcon.src = `${ICON_BASE_URL}thunderstorms-typhoon.svg`;
+            warnIcon.style.display = "inline-block";
+        } else if (codes.includes('WRAINB')) {
+            warnEl.innerText = "Black Rain"; warnEl.className = "warn-black";
         } else if (codes.includes('WRAINR')) {
-            warnEl.innerText = "🔴 Red Rain";
-            warnEl.classList.add('warn-red');
-        } else {
-            const typhoon = codes.find(c => c.startsWith('WTC'));
-            if (typhoon) {
-                const signal = typhoon.replace('WTC', '');
-                warnEl.innerText = `🌀 Typhoon #${signal}`;
-                warnEl.classList.add('warn-typhoon');
-            } else {
-                warnEl.innerText = "🟢 All clear";
-                warnEl.classList.add('warn-clear');
-            }
+            warnEl.innerText = "Red Rain"; warnEl.className = "warn-red";
         }
-        warnEl.style.display = "inline-block";
-    } catch (e) {
-        console.error("Warning API Offline", e);
-    }
+    } catch (e) { console.warn("Warnings Offline"); }
 }
 
 // Call this AFTER your calendar events are rendered
@@ -1247,3 +1246,5 @@ setTimeout(initScrollSync, 1500);
 
 </body>
 </html>
+Viewport
+Window
