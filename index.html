@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Family Command Center</title>
     <style>
         :root {
@@ -22,6 +22,9 @@
             background: var(--bg); color: var(--text);
             font-family: -apple-system, system-ui, sans-serif;
             overflow: hidden; font-size: 1.1vw;
+            /* ✅ Safe area for iPad notch/home indicator */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         header {
@@ -113,21 +116,78 @@
         .visual-handle { width: 80px; height: 8px; background: #D1D1D6; border-radius: 4px; }
 
         .calendar-layout { display: flex; height: 100%; position: relative; overflow: hidden; }
-        .time-gutter { width: 70px; border-right: 1px solid #E5E5EA; background: #fafafa; padding-top: 60px; flex-shrink: 0; }
-        .calendar-grid { flex: 1; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; overflow-y: auto; overflow-x: hidden; height: 100%; }
-        .day-column { border-right: 1px solid #F2F2F7; position: relative; min-height: 1800px; padding-top: 60px; background-image: linear-gradient(#F2F2F7 1px, transparent 1px); background-size: 100% 90px; }
+        .time-gutter { width: 50px; border-right: 1px solid #E5E5EA; background: #fafafa; padding-top: 60px; flex-shrink: 0; }
+        .calendar-grid { 
+            flex: 1; 
+            display: grid; 
+            /* ✅ Grid stability: Each column min 120px for readable text */
+            grid-template-columns: repeat(7, minmax(130px, 1fr)); 
+            position: relative; 
+            overflow-y: auto; 
+            overflow-x: hidden; 
+            height: 100%; 
+        }
+        .day-column { 
+            border-right: 1px solid #F2F2F7; 
+            position: relative; 
+            min-height: 1800px; 
+            padding-top: 60px; 
+            background-image: linear-gradient(#F2F2F7 1px, transparent 1px); 
+            background-size: 100% 90px; 
+            /* ✅ Prevent column from shrinking below min */
+            min-width: 130px;
+        }
         #view-calendar .day-column { background-image: linear-gradient(#F2F2F7 1px, transparent 1px); background-size: 100% 90px; }
         .day-header { position: absolute; top: 0; left: 0; right: 0; height: 60px; text-align: center; display: flex; flex-direction: column; justify-content: center; background: white; z-index: 10; border-bottom: 1px solid #E5E5EA; }
         .is-weekend { background-color: #E9F5FE !important; }       
-        .task-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; height: 100%; }
-        .task-day { background: #f9f9fb; border-radius: 15px; padding: 10px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #eee; }
+        .task-grid { 
+            display: grid; 
+            /* ✅ Grid stability: Each column min 120px */
+            grid-template-columns: repeat(7, minmax(120px, 1fr)); 
+            gap: 10px; 
+            height: 100%; 
+        }
+        .task-day { background: #f9f9fb; border-radius: 15px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #eee; }
         .task-day-header { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--dim-text); text-align: center; margin-bottom: 5px; }
 
-        .event-card { border-radius: 12px; padding: 15px; font-size: 1.3rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
+        .event-card { 
+            border-radius: 12px; 
+            padding: 5px; 
+            /* ✅ Smaller font for better fit */
+            font-size: 0.95rem; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            cursor: pointer; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            position: relative; 
+            overflow: visible; 
+            border: 1px solid rgba(0,0,0,0.05);
+            /* ✅ Allow text to wrap naturally */
+            word-wrap: break-word;
+            word-break: break-word;
+        }
         #view-calendar .event-card { position: absolute; left: 4px; right: 4px; }
         #view-tasks .event-card { position: relative; margin-bottom: 2px; height: auto !important; }
-        .event-title { font-size: 1.8rem !important; font-weight: 800; color: #000; line-height: 1.1; margin-bottom: 4px; }
-        .event-time { font-size: 1.4rem; font-weight: 700; color: rgba(0,0,0,0.5); }
+        .event-title { 
+            /* ✅ Much smaller font for readability */
+            font-size: 1.5rem !important; 
+            font-weight: 800; 
+            color: #000; 
+            line-height: 1.3; 
+            margin-bottom: 6px;
+            /* ✅ Natural text wrapping, no artificial truncation */
+            white-space: normal;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        .event-time { 
+            /* ✅ Smaller time label */
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            color: rgba(0,0,0,0.5); 
+        }
         .avatar-bubble {
             width: 20px;
             height: 20px;
@@ -232,7 +292,6 @@
         #view-tasks .event-card {
             min-height: 100px;
             margin-bottom: 15px;
-            padding: 18px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -240,8 +299,13 @@
         }
 
         #view-tasks .event-title {
-            font-size: 1.3rem;
-            width: 85%;
+            /* ✅ Smaller font for consistency */
+            font-size: 1rem;
+            width: 100%;
+            /* ✅ Natural wrapping */
+            white-space: normal;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         #view-tasks .event-time {
@@ -297,7 +361,6 @@
         }
 
         .event-card .event-title {
-            padding-right: 40px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -793,7 +856,7 @@
             el.style.height = Math.max(h, 45) + 'px'; 
 
             el.innerHTML = `
-                <div class="event-title" style="padding-right: 35px;">${evt.title.replace(/#\w+/g, '')}</div>
+                <div class="event-title">${evt.title.replace(/#\w+/g, '')}</div>
                 <div class="event-time">${formatTime(start)}</div>
                 <div class="avatar-stack" style="right: 8px; left: auto; flex-direction: row-reverse;">${avatars}</div>
             `;
